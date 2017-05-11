@@ -1,5 +1,6 @@
 #include "myGaussian.h"
 
+
 template <typename T>
 inline T MULT(T value) {
 	return value*value;
@@ -9,8 +10,6 @@ inline T MULT(T value1, T value2)
 {
 	return (value1 * value1) + (value2 * value2);
 };
-
-
 
 uchar calculation(Mat kernel, Mat pixel)
 {
