@@ -7,4 +7,4 @@ Study (Exactly learned) Image Processing using OpenCV
 
 2017.05.12 -  remodeling structure
 
-2017.05.12 -  modify code error, project proceeded to step 2.
+2017.05.12 -  modify code error, current progress is step 2
