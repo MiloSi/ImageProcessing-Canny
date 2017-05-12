@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4996)
 
 #include <iostream>
 #include <opencv2\opencv.hpp>
@@ -19,30 +20,8 @@ inline T MULT(T value1, T value2)
 
 enum ORIENTATION { VERTICAL = 1, HORIZONTAL = 2 };
 
-Mat myGaussainKernel(const Size);
-Mat mySobelKernel(ORIENTATION flag);
-Mat myPrwittKernel(ORIENTATION flag);
+Mat myGaussianKernel(const Size nSize = Size(5, 5), const float sigma = 1.4);
+Mat mySobelKernel(ORIENTATION flag = VERTICAL);
+Mat myPrwittKernel(ORIENTATION flag = VERTICAL);
 
 
-
-
-uchar prwitt1[3][3] = {
-	{ 1,1,1 },
-	{ 0,0,0 },
-	{ -1,-1,-1 }
-};
-uchar prwitt2[3][3] = {
-	{ 1, 0,-1 },
-	{ 1, 0,-1 },
-	{ 1, 0,-1 }
-};
-uchar sobel1[3][3] = {
-	{ 1,2,1 },
-	{ 0,0,0 },
-	{ -1,-2,-1 }
-};
-uchar sobel2[3][3] = {
-	{ 1,0, -1 },
-	{ 2,0, -2 },
-	{ 1,0,-1 }
-};

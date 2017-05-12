@@ -1,3 +1,4 @@
+#pragma once
 #include "myConvolution.h"
 
 
@@ -36,9 +37,9 @@ uchar calculation2(const Mat kernel, Mat pixels)
 Mat myConvolution(const Mat src, const Mat kernel, FILTERING flag)
 {
 
-	Mat dst(src.rows, src.cols, src.type);
-	int x_half = kernel.cols >> 2;
-	int y_half = kernel.rows >> 2;
+	Mat dst(src.rows, src.cols, src.type());
+	int x_half = kernel.cols >> 1;
+	int y_half = kernel.rows >> 1;
 
 	switch (flag)
 	{

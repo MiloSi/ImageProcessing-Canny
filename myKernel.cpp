@@ -1,6 +1,29 @@
+#pragma once
+#pragma warning (disable : 4838)
 #include "myKernel.h"
 
-Mat myGaussianKernel(const Size nSize =  Size(5, 5) , const float sigma = 1.4)
+uchar prwitt1[3][3] = {
+	{ 1,1,1 },
+	{ 0,0,0 },
+	{ -1,-1,-1 }
+};
+uchar prwitt2[3][3] = {
+	{ 1, 0,-1 },
+	{ 1, 0,-1 },
+	{ 1, 0,-1 }
+};
+uchar sobel1[3][3] = {
+	{ 1,2,1 },
+	{ 0,0,0 },
+	{ -1,-2,-1 }
+};
+uchar sobel2[3][3] = {
+	{ 1,0, -1 },
+	{ 2,0, -2 },
+	{ 1,0,-1 }
+};
+
+Mat myGaussianKernel(const Size nSize, const float sigma)
 {
 	Mat kernel(nSize, CV_32F);
 	int half_x = nSize.width >> 1;
@@ -21,7 +44,7 @@ Mat myGaussianKernel(const Size nSize =  Size(5, 5) , const float sigma = 1.4)
 
 	return kernel;
 }
-Mat myPrwittKernel(ORIENTATION flag = VERTICAL, int weight = 1)
+Mat myPrwittKernel(ORIENTATION flag)
 {
 	Mat kernel;
 	switch (flag)
@@ -35,7 +58,7 @@ Mat myPrwittKernel(ORIENTATION flag = VERTICAL, int weight = 1)
 	}
 	return kernel;
 }
-Mat mySobelKernel(ORIENTATION flag = VERTICAL, int weight = 1)
+Mat mySobelKernel(ORIENTATION flag)
 {
 	Mat kernel;
 	switch (flag)

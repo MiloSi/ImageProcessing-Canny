@@ -24,10 +24,7 @@
 #pragma once
 
 #include <iostream>
-#include "myGaussian.h"
-#include "myDerivative.h"
-#include <opencv2\opencv.hpp>
-
+#include "myCanny.h"
 
 
 using namespace std;
@@ -36,6 +33,9 @@ using namespace cv;
 
 int main(int argc, char* argv[])
 {
+	Mat src = imread("lenna.bmp", IMREAD_GRAYSCALE);
+	myCannyEdge(src, src.clone());
+
 
 	return 0;
 }
