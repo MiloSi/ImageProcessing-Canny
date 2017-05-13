@@ -2,20 +2,18 @@
 #pragma warning (disable : 4838)
 #include "myKernel.h"
 
-uchar prwitt1[] = {
+int prwitt1[] = {
 	 -1,-1,-1 , 
 	 0,0,0 ,
 	 1,1,1 
 };
-uchar prwitt2[] = {
+int prwitt2[] = {
 	 -1, 0,1 ,
 	 -1, 0,1 ,
 	 -1, 0,1 
 };
 int sobel1[] = {
-	 -1,-2,-1 ,
-	 0,0,0 ,
-	 1,2,1 
+	 -1,-2,-1, 0, 0, 0, 1, 2, 1 
 };
 int sobel2[] = {
 	 -1,0, 1 ,
@@ -50,10 +48,10 @@ Mat myPrwittKernel(ORIENTATION flag)
 	switch (flag)
 	{
 	case VERTICAL:
-		kernel = Mat(3, 3, CV_8UC1, &prwitt1);
+		kernel = Mat(3, 3, CV_32S, prwitt1);
 		break;
 	case HORIZONTAL:
-		kernel = Mat(3, 3, CV_8UC1, &prwitt2);
+		kernel = Mat(3, 3, CV_32S, prwitt2);
 		break;
 	}
 	return kernel;
@@ -64,8 +62,9 @@ Mat mySobelKernel(ORIENTATION flag)
 	switch (flag)
 	{
 	case VERTICAL:
-		kernel = (Mat_<int>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
-//		kernel = Mat(3, 3, CV_16S, sobel1);
+//		kernel = (Mat_<int>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
+		kernel = Mat(3, 3, CV_32S, sobel1);
+		cout << kernel << endl;
 		break;
 	case HORIZONTAL:
 		kernel = (Mat_<int>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
