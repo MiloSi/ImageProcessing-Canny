@@ -8,7 +8,7 @@ using namespace cv;
 
 enum FILTERING {
 	BLUR = 1,
-	DERIVATIVE = 2
+	DERIVATIVE,
 };
 
 uchar calculation1(const Mat kernel, Mat pixels);

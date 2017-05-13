@@ -1,5 +1,6 @@
 #pragma once
 #include "myConvolution.h"
+#include "myKernel.h"
 
 
 
@@ -43,7 +44,7 @@ Mat myConvolution(const Mat src, const Mat kernel, FILTERING flag)
 
 	switch (flag)
 	{
-	case BLUR :
+	case BLUR:
 		for (int y = y_half; y < src.rows - y_half; y++)
 		{
 			uchar* ptr = dst.ptr(y);
@@ -56,7 +57,7 @@ Mat myConvolution(const Mat src, const Mat kernel, FILTERING flag)
 		break;
 
 
-	case DERIVATIVE :
+	case DERIVATIVE:
 		for (int y = y_half; y < src.rows - y_half; y++)
 		{
 			uchar* ptr = dst.ptr(y);
