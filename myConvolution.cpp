@@ -34,10 +34,9 @@ uchar calculation2(const Mat kernel, Mat pixels)
 			dst += (int) pixels.at<uchar>(i, j) * (int) kernel.at<int>(i, j);
 		}
 
-	} 
-
-
-
+	}
+	dst =  (dst < 0) ? 0 : dst;
+	dst =  (dst > 255) ? 255 : dst;
 	return (uchar)dst;
 }
 
