@@ -2,25 +2,25 @@
 #pragma warning (disable : 4838)
 #include "myKernel.h"
 
-uchar prwitt1[3][3] = {
-	{ -1,-1,-1 }, 
-	{ 0,0,0 },
-	{ 1,1,1 }
+uchar prwitt1[] = {
+	 -1,-1,-1 , 
+	 0,0,0 ,
+	 1,1,1 
 };
-uchar prwitt2[3][3] = {
-	{ -1, 0,1 },
-	{ -1, 0,1 },
-	{ -1, 0,1 }
+uchar prwitt2[] = {
+	 -1, 0,1 ,
+	 -1, 0,1 ,
+	 -1, 0,1 
 };
-uchar sobel1[3][3] = {
-	{ -1,-2,-1 },
-	{ 0,0,0 },
-	{ 1,2,1 }
+int sobel1[] = {
+	 -1,-2,-1 ,
+	 0,0,0 ,
+	 1,2,1 
 };
-uchar sobel2[3][3] = {
-	{ -1,0, 1 },
-	{ -2,0, 2 },
-	{ -1,0,1 }
+int sobel2[] = {
+	 -1,0, 1 ,
+	 -2,0, 2 ,
+	 -1,0,1 
 };
 
 Mat myGaussianKernel(const Size nSize, const float sigma)
@@ -64,10 +64,12 @@ Mat mySobelKernel(ORIENTATION flag)
 	switch (flag)
 	{
 	case VERTICAL:
-		kernel = Mat(3, 3, CV_8UC1, &sobel1);
+		kernel = (Mat_<int>(3, 3) << -1, -2, -1, 0, 0, 0, 1, 2, 1);
+//		kernel = Mat(3, 3, CV_16S, sobel1);
 		break;
 	case HORIZONTAL:
-		kernel = Mat(3, 3, CV_8UC1, &sobel2);
+		kernel = (Mat_<int>(3, 3) << -1, 0, 1, -2, 0, 2, -1, 0, 1);
+//		kernel = Mat(3, 3, CV_16S, sobel2);
 		break;
 	}
 	return kernel;

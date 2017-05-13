@@ -28,14 +28,20 @@ uchar calculation2(const Mat kernel, Mat pixels)
 	{
 		for (int j = 0; j < pixels.cols; j++)
 		{
-			dst += pixels.at<uchar>(i, j) * kernel.at<uchar>(i, j);
+			int a = (int)kernel.at<int>(i, j);
+			int b = (int)pixels.at<uchar>(i, j);
+
+			dst += (int) pixels.at<uchar>(i, j) * (int) kernel.at<int>(i, j);
 		}
 
-	}
+	} 
+
+
+
 	return (uchar)dst;
 }
 
-Mat myConvolution(const Mat src, const Mat kernel, FILTERING flag)
+Mat myConvolution(const Mat src, Mat& kernel, FILTERING flag)
 {
 
 	Mat dst(src.rows, src.cols, src.type());
