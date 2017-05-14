@@ -22,12 +22,10 @@ void myCannyEdge(Mat src, Mat& dst)
 	Mat angle = myMatrixOperation(sobel1, sobel2, DIRECTION);
 
 
-	imshow("1", sobel1);
+/*	imshow("1", sobel1);
 	imshow("2", sobel2);
 	imshow("3", magnitude);
 	imshow("4", angle);
-
-
-	waitKey(0);
+	waitKey(0);*/
 
 }
