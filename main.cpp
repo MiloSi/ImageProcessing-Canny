@@ -15,6 +15,7 @@
 
 
 	From OpenCV http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html
+	From studied http://www.pages.drexel.edu/~nk752/Research/cannyTut2.html
 
 
 
