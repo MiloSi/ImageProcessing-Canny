@@ -34,9 +34,12 @@ uchar calculation2(const Mat kernel, Mat pixels)
 			dst += (int) pixels.at<uchar>(i, j) * (int) kernel.at<int>(i, j);
 		}
 
-	}
-	dst =  (dst < 0) ? 0 : dst;
-	dst =  (dst > 255) ? 255 : dst;
+	} 
+
+	dst = (dst > 255) ? 255 : dst;
+	dst = (dst < 0) ? 0 : dst;
+
+
 	return (uchar)dst;
 }
 
@@ -46,10 +49,11 @@ Mat myConvolution(const Mat src, Mat& kernel, FILTERING flag)
 	Mat dst(src.rows, src.cols, src.type());
 	int x_half = kernel.cols >> 1;
 	int y_half = kernel.rows >> 1;
-
 	switch (flag)
 	{
 	case BLUR:
+		
+
 		for (int y = y_half; y < src.rows - y_half; y++)
 		{
 			uchar* ptr = dst.ptr(y);
@@ -63,12 +67,12 @@ Mat myConvolution(const Mat src, Mat& kernel, FILTERING flag)
 
 
 	case DERIVATIVE:
-		for (int y = y_half; y < src.rows - y_half; y++)
+		for (int y = 1; y < src.rows - 1; y++)
 		{
 			uchar* ptr = dst.ptr(y);
-			for (int x = x_half; x < src.cols - x_half; x++)
+			for (int x = 1; x < src.cols - 1; x++)
 			{
-				Mat pixels(src, Rect(x - x_half, y - y_half, kernel.cols, kernel.rows));
+				Mat pixels(src, Rect(x - 1, y - 1, kernel.cols, kernel.rows));
 				ptr[x] = calculation2(kernel, pixels);
 			}
 		}

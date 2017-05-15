@@ -15,3 +15,4 @@ enum OPERATION{
 
 Mat myMatrixOperation(Mat&, Mat&, OPERATION flag);
 Mat myTraceEdge(Mat&, Mat&, double, double);
+void myRemoveWeakEdge(Mat&);

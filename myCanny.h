@@ -7,4 +7,4 @@
 using namespace cv;
 
 
-void myCannyEdge(Mat src, Mat& dst);
+void myCannyEdge(Mat src, Mat& dst, const double, const double);
