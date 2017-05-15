@@ -11,4 +11,7 @@ enum OPERATION{
 	DIRECTION = 2
 };
 
+
+
 Mat myMatrixOperation(Mat&, Mat&, OPERATION flag);
+Mat myTraceEdge(Mat&, Mat&, double, double);

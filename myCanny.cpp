@@ -3,7 +3,7 @@
 #include "myCalculation.h"
 
 
-void myCannyEdge(Mat src, Mat& dst)
+void myCannyEdge(Mat src, Mat& dst, double lowerThreshold, double upperThreshold)
 {
 
 	if (src.type() != CV_8UC1)
@@ -11,7 +11,7 @@ void myCannyEdge(Mat src, Mat& dst)
 
 
 	/// GAUSSIAN FILTER
-	//dst = myConvolution(dst, myGaussianKernel(), BLUR);
+	dst = myConvolution(dst, myGaussianKernel(), BLUR);
 
 
 	Mat sobel1 = myConvolution(dst, mySobelKernel(), DERIVATIVE);
@@ -21,11 +21,15 @@ void myCannyEdge(Mat src, Mat& dst)
 	Mat magnitude = myMatrixOperation(sobel1, sobel2, MAGNITUDE);
 	Mat angle = myMatrixOperation(sobel1, sobel2, DIRECTION);
 
+	//3. Apply non - maximum suppression to get rid of spurious response to edge detection
 
-/*	imshow("1", sobel1);
-	imshow("2", sobel2);
-	imshow("3", magnitude);
-	imshow("4", angle);
-	waitKey(0);*/
+
+
+
+	//imshow("1", sobel1);
+	//imshow("2", sobel2);
+	//imshow("3", magnitude);
+	//imshow("4", angle);
+	//waitKey(0);
 
 }
