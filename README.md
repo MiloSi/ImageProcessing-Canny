@@ -16,3 +16,5 @@ Studied (Exactly learned) Image Processing using OpenCV
 2017.05.15 -  added edge trace. current progress is step 3
 
 2017.05.15 -  I completed canny edge, but these program has a problem.
+
+2017.05.16 -  I learned that sobel convolution result should be float, not uchar
