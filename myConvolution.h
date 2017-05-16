@@ -12,7 +12,7 @@ enum FILTERING {
 };
 
 uchar calculation1(const Mat kernel, Mat pixels);
-uchar calculation2(const Mat kernel, Mat pixels);
+float calculation2(const Mat kernel, Mat pixels);
 Mat myConvolution(const Mat src, Mat& kernel, FILTERING flag);
 
 
