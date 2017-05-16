@@ -3,7 +3,7 @@
 
 Mat myMatrixOperation(Mat& mat1, Mat& mat2, OPERATION flag)
 {
-	Mat dst(mat1.rows, mat2.cols, mat1.type());
+	Mat dst(mat1.rows, mat2.cols, CV_32F);
 
 	
 	switch (flag)
@@ -12,39 +12,45 @@ Mat myMatrixOperation(Mat& mat1, Mat& mat2, OPERATION flag)
 
 		for (int y = 1; y < mat1.rows -1; y++)
 		{
-			uchar* ptr1 = mat1.ptr<uchar>(y);
-			uchar* ptr2 = mat2.ptr<uchar>(y);
-			uchar* dstPtr = dst.ptr<uchar>(y);
+			float* ptr1 = mat1.ptr<float>(y);
+			float* ptr2 = mat2.ptr<float>(y);
+			float* dstPtr = dst.ptr<float>(y);
 
 			for (int x = 1; x < mat1.cols -1; x++)
 			{
 				float p = sqrt(MULT<float>(ptr1[x], ptr2[x]));
-				dstPtr[x] = (uchar)p;
+				dstPtr[x] = p;
 			}
 		}
 
 		break;
 	case DIRECTION:
-
+		dst = Mat(mat1.rows, mat1.cols, CV_8U);
 		for (int y = 1; y < mat1.rows -1; y++)
 		{
-			uchar* ptr1 = mat1.ptr<uchar>(y);
-			uchar* ptr2 = mat2.ptr<uchar>(y);
+			float* ptr1 = mat1.ptr<float>(y);
+			float* ptr2 = mat2.ptr<float>(y);
 			uchar* dstPtr = dst.ptr<uchar>(y);
 
 
 
 			for (int x = 1; x < mat1.cols -1; x++)
 			{
-				float p = atan2((float)ptr1[x], (float)ptr2[x]) * 180.0f / CV_PI;
-				p /= 12.5;
-				p = (p < 0) ? 8 + p : p;
-				if (p < 1 || p > 7) { p = 0; }
-				else if (p < 3) { p = 45; }
-				else if (p < 5) { p = 90; }
-				else { p = 135; }
+				//float p = atan2(ptr1[x], ptr2[x]) * 180.0f / CV_PI;
+				float p;
+				if (ptr2[x] == 0)
+					p = 90;
+				else
+				 p = atan(ptr1[x] / ptr2[x]) * 180 / CV_PI;
 				
-				dstPtr[x] = (uchar)p;
+				p /= 22.5;
+				//p = (p < 0) ? 8 + p : p;
+				if (p > 7) p = 0;
+				if (p < 1 || p > 7) { dstPtr[x] = 0; }
+				else if (p < 3) { dstPtr[x] = 45; }
+				else if (p < 5) { dstPtr[x] = 90; }
+				else if (p < 7){ dstPtr[x] = 135; }
+				
 			}
 		}
 		break;
@@ -59,14 +65,14 @@ Mat myMatrixOperation(Mat& mat1, Mat& mat2, OPERATION flag)
 Mat myTraceEdge(Mat& gradient, Mat& direction, double lowerThreshold, double upperThreshold)
 {
 
-	Mat dst(gradient.rows, gradient.cols, gradient.type(), Scalar(0));
+	Mat dst(gradient.rows, gradient.cols, CV_8U, Scalar(0));
 	uchar ptr_value;
 	vector<Point2i> strongEdgePoints;
 
 	for (int y = 1; y < gradient.rows - 1; y++)
 	{
-		uchar* dptr = direction.ptr(y);
-		uchar* gptr = gradient.ptr(y);
+		uchar* dptr = direction.ptr<uchar>(y);
+		float* gptr = gradient.ptr<float>(y);
 		uchar* dst_ptr = dst.ptr(y);
 
 		
@@ -83,19 +89,19 @@ Mat myTraceEdge(Mat& gradient, Mat& direction, double lowerThreshold, double upp
 				switch (dptr[x])
 				{
 				case 0:
-					if (direction.at<uchar>(y, x - 1) <= ptr_value && direction.at<uchar>(y, x + 1) <= ptr_value)
+					if (gradient.at<float>(y, x - 1) <= ptr_value && gradient.at<float>(y, x + 1) < ptr_value)
 						isMax = true;
 					break;
 				case 45:
-					if (direction.at<uchar>(y - 1, x - 1) <= ptr_value && direction.at<uchar>(y + 1, x + 1) <= ptr_value)
+					if (gradient.at<float>(y - 1, x - 1) <= ptr_value && gradient.at<float>(y + 1, x + 1) < ptr_value)
 						isMax = true;
 					break;
 				case 90:
-					if (direction.at<uchar>(y - 1, x) <= ptr_value && direction.at<uchar>(y + 1, x) <= ptr_value)
+					if (gradient.at<float>(y - 1, x) <= ptr_value && gradient.at<float>(y + 1, x) < ptr_value)
 						isMax = true;
 					break;
 				case 135:
-					if (direction.at<uchar>(y - 1, x + 1) <= ptr_value && direction.at<uchar>(y + 1, x - 1) <= ptr_value)
+					if (gradient.at<float>(y - 1, x + 1) <= ptr_value && gradient.at<float>(y + 1, x - 1) < ptr_value)
 						isMax = true;
 					break;
 				}
