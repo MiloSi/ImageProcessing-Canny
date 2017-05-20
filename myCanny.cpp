@@ -11,33 +11,19 @@ void myCannyEdge(Mat src, Mat& dst, double lowerThreshold, double upperThreshold
 
 
 	/// GAUSSIAN FILTER
-	src = myConvolution(src, myGaussianKernel(Size(5,5), 1), BLUR);
+	Mat gaussian = myConvolution(src, myGaussianKernel(Size(5,5), 0.5), BLUR);
 
-
-
-	Mat sobel1 = myConvolution(src, mySobelKernel(VERTICAL), DERIVATIVE);
-	Mat sobel2 = myConvolution(src, mySobelKernel(HORIZONTAL), DERIVATIVE);
-
-/*
-	Mat sobel1, sobel2;
-
-	Sobel(src, sobel1, 0, 0, 1);
-	Sobel(src, sobel2, 0, 1, 0);
-*/
 
 	
-	
-
-	imshow("0", src);
-
-
+	Mat sobel1 = myConvolution(gaussian, mySobelKernel(VERTICAL), DERIVATIVE);
+	Mat sobel2 = myConvolution(gaussian, mySobelKernel(HORIZONTAL), DERIVATIVE);
 
 	Mat magnitude = myMatrixOperation(sobel1, sobel2, MAGNITUDE);
 	Mat angle = myMatrixOperation(sobel1, sobel2, DIRECTION);
 
 
 //	imshow("1", sobel1);
-//	imshow("2", sobel2);
+// 	imshow("2", sobel2);
 //	imshow("3", magnitude);
 //	imshow("4", angle);
 	dst = myTraceEdge(magnitude, angle, lowerThreshold, upperThreshold);

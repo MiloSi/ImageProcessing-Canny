@@ -37,13 +37,10 @@ int main(int argc, char* argv[])
 	Mat src = imread("lenna.bmp", IMREAD_GRAYSCALE);
 	Mat dst;
 	Mat canny1;
-	myCannyEdge(src, dst, 50 , 100);
-	Canny(src, canny1, 50, 100);
 
+	myCannyEdge(src, dst, 50 , 150);
+   
 	imshow("myCannyEdge", dst);
-
-	//imshow("CannyEdge", canny1);
-
 	waitKey(0);
 
 	return 0;
