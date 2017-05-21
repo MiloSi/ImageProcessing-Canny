@@ -5,6 +5,4 @@
 #include "myKernel.h"
 
 using namespace cv;
-
-
 void myCannyEdge(Mat src, Mat& dst, const double, const double);
