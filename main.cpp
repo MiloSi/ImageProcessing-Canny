@@ -17,8 +17,6 @@
 	From OpenCV http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html
 	From studied http://www.pages.drexel.edu/~nk752/Research/cannyTut2.html
 
-
-
 ***********************************************/
 
 
@@ -39,8 +37,10 @@ int main(int argc, char* argv[])
 	Mat canny1;
 
 	myCannyEdge(src, dst, 50 , 150);
+	Canny(src, canny1, 50, 150);
    
 	imshow("myCannyEdge", dst);
+	imshow("canny", canny1);
 	waitKey(0);
 
 	return 0;

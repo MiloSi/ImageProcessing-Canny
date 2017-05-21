@@ -13,6 +13,7 @@ enum OPERATION{
 
 
 
-Mat myMatrixOperation(Mat&, Mat&, OPERATION flag);
-Mat myTraceEdge(Mat&, Mat&, double, double);
+Mat myMatrixOperation(Mat&, Mat&, OPERATION flag = MAGNITUDE);
+Mat myMatrixOperation(Mat& mat1, Mat& mat2, const Mat magnitude, OPERATION flag = DIRECTION);
+Mat myTraceEdge(Mat&, Mat&, const double, const double);
 void myRemoveWeakEdge(Mat&);

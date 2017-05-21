@@ -20,7 +20,7 @@ inline T MULT(T value1, T value2)
 
 enum ORIENTATION { VERTICAL = 1, HORIZONTAL = 2 };
 
-Mat myGaussianKernel(const Size nSize = Size(5, 5), const float sigma = 1.4);
+Mat myGaussianKernel(const Size nSize = Size(5, 5), const double sigma = 1.4);
 Mat mySobelKernel(ORIENTATION flag = VERTICAL);
 Mat myPrwittKernel(ORIENTATION flag = VERTICAL);
 
